@@ -8,7 +8,7 @@ const controller = {
         res.render('login', { title: 'Login'});
     },
     register: function(req, res) {
-        res.render('index', { title: 'Register'});
+        res.render('register');
     }
 }
 

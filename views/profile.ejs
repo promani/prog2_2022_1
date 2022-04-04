@@ -1,0 +1,8 @@
+<%- include('./partials/header.ejs') %> 
+    <h1><%= user.name %></h1>
+    <ul>
+      <li><b>email:</b> <%= user.email %></li>
+      <li><b>phone:</b> <%= user.phone %></li>
+    </ul>
+    <img src="<%= user.picture %>" style="max-width: 200px;" />
+<%- include('./partials/footer.ejs') %> 
