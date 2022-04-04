@@ -1,0 +1,9 @@
+<%- include('./partials/header.ejs') %> 
+    <h1><%= book.title %></h1>
+    <ul>
+      <li><b>Author:</b> <a href="/books/author/<%= book.author %>"><%= book.author %></a></li>
+      <li><b>Year:</b> <%= book.year_written %></li>
+      <li><b>edition:</b> <%= book.edition %></li>
+      <li><b>Price:</b>$ <%= book.price %></li>
+    </ul>
+<%- include('./partials/footer.ejs') %> 

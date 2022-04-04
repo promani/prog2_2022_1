@@ -1,0 +1,8 @@
+<%- include('./partials/header.ejs') %> 
+<h1>Books</h1>
+<ul>
+  <% for (let i= 0; i < books.length; i++) { %>
+    <li><a href="/books/<%= books[i].id %>"><%= books[i].title %></a></li>
+  <% } %>
+</ul>
+<%- include('./partials/footer.ejs') %> 
