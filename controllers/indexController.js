@@ -1,4 +1,4 @@
-var autos = require('../db/autos');
+var db = require('../database/models');
 
 const controller = {
     index: function(req, res) {
@@ -9,7 +9,13 @@ const controller = {
     },
     register: function(req, res) {
         res.render('register');
-    }
+    },
+    prueba: function(req, res) {
+        db.Book.findAll()
+            .then(function(books){
+                res.send(books);
+            });
+    },
 }
 
 module.exports = controller;
