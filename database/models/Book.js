@@ -7,7 +7,9 @@ module.exports = function (sequelize, dataTypes) {
         },
         title: { type: dataTypes.STRING },
         author: { type: dataTypes.STRING },
-        year_written: { type: dataTypes.INTEGER }
+        year_written: { type: dataTypes.INTEGER },
+        price: { type: dataTypes.INTEGER },
+        cover: { type: dataTypes.STRING },
     }
 
     const configs = {
