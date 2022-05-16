@@ -1,11 +1,13 @@
 module.exports = function (sequelize, dataTypes) {
     const cols = {
         id: {
-            autoincrement: true,
+            autoIncrement: true,
             primaryKey: true,
             type: dataTypes.INTEGER
         },
-        username: { type: dataTypes.STRING }
+        username: { type: dataTypes.STRING },
+        password: { type: dataTypes.STRING },
+        email: { type: dataTypes.STRING }
     }
 
     const configs = {

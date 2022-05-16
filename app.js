@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./database/models');
 
-// db.sequelize.sync();
+// db.sequelize.sync({ force: true });
 
 var indexRouter = require('./routes/index');
 var booksRouter = require('./routes/books');

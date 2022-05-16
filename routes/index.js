@@ -4,8 +4,9 @@ var controller = require('../controllers/indexController')
 
 router.get('/', controller.index);
 router.get('/login', controller.login);
+router.post('/login', controller.access);
 router.get('/register', controller.register);
-router.get('/prueba', controller.prueba);
+router.post('/register', controller.store);
 
 
 module.exports = router;
