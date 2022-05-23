@@ -3,7 +3,7 @@ var hasher = require('bcryptjs');
 
 const controller = {
     index: function(req, res) {
-        res.render('index', { title: 'Index'});
+        res.redirect('/books');
     },
     login: function(req, res) {
         res.render('login', { title: 'Login'});
@@ -13,6 +13,10 @@ const controller = {
             .then(function(user) {
                 if (!user) throw Error('User not found.')
                 if (hasher.compareSync(req.body.password, user.password)) {
+                    req.session.user = user;
+                    if (req.body.rememberme) {
+                        res.cookie('userId', user.id, { maxAge: 1000 * 60 * 60 * 7 })
+                    }
                     res.redirect('/');
                 } else {
                     throw Error('Invalid credentials.')
@@ -21,6 +25,11 @@ const controller = {
             .catch(function (err) {
                 next(err)
             })
+    },
+    logout: function (req, res, next) {
+        req.session.user = null;
+        res.clearCookie('userId');
+        res.redirect('/')
     },
     register: function(req, res) {
         res.render('register');

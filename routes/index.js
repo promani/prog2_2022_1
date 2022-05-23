@@ -3,7 +3,9 @@ var router = express.Router();
 var controller = require('../controllers/indexController')
 
 router.get('/', controller.index);
+router.get('/hello', controller.hello);
 router.get('/login', controller.login);
+router.get('/logout', controller.logout);
 router.post('/login', controller.access);
 router.get('/register', controller.register);
 router.post('/register', controller.store);

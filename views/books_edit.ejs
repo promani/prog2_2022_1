@@ -1,0 +1,21 @@
+<%- include('./partials/header.ejs') %> 
+<h1>Add Books</h1>
+<form method="post">
+  <label class="form-label">Title</label>
+  <input type="text" class="form-control" name="title" id="title" value="<%= book.title %>" />
+  
+  <label>Author</label>
+  <input type="text" class="form-control" name="author" id="author" value="<%= book.author %>" />
+  
+  <label>Publication year</label>
+  <input type="number" class="form-control" name="year_written" id="year_written" value="<%= book.year_written %>" />
+  
+  <label>Price</label>
+  <input type="number" class="form-control" name="price" id="price" value="<%= book.price %>" />
+  
+  <label>Created at</label>
+  <input type="date" class="form-control" name="created_at" id="created_at" value="<%= book.created_at %>" />
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<%- include('./partials/footer.ejs') %> 

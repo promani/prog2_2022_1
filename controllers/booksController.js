@@ -1,4 +1,3 @@
-var books = require('../data/books');
 var db = require('../database/models');
 
 const controller = {
@@ -28,12 +27,12 @@ const controller = {
             .catch(function (error) {
                 res.send(error);
             })
-
     },
     add: function(req, res) {
         res.render('books_add');
     },
     store: function(req, res) {
+        req.body.user_id = req.session.user.id; 
         db.Book.create(req.body)
             .then(function() {
                 res.redirect('/')
@@ -41,7 +40,34 @@ const controller = {
             .catch(function(error) {
                 res.send(error);
             })
-    }
+    },
+    delete: function(req, res) {
+        db.Book.destroy({ where: { id: req.params.id } })
+            .then(function() {
+                res.redirect('/')
+            })
+            .catch(function(error) {
+                res.send(error);
+            })
+    },
+    edit: function(req, res) {
+        db.Book.findByPk(req.params.id)
+            .then(function (book) {
+                res.render('books_edit', { book });
+            })
+            .catch(function (error) {
+                res.send(error);
+            })
+    },
+    update: function(req, res) {
+        db.Book.update(req.body, { where: { id: req.params.id } })
+            .then(function(book) {
+                res.redirect('/')
+            })
+            .catch(function(error) {
+                res.send(error);
+            })
+    },
 }
 
 module.exports = controller;
