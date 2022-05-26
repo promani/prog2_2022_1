@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs') %> 
 <h1>Add Books</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <label class="form-label">Title</label>
   <input type="text" class="form-control" name="title" id="title" value="<%= book.title %>" />
   
@@ -16,6 +16,9 @@
   <label>Created at</label>
   <input type="date" class="form-control" name="created_at" id="created_at" value="<%= book.created_at %>" />
 
+  <label>Cover</label>
+  <input type="file" class="form-control" name="cover" id="cover" />
+  
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <%- include('./partials/footer.ejs') %> 

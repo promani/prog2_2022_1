@@ -1,6 +1,6 @@
 <%- include('./partials/header.ejs') %> 
 <h1>Add Books</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
   <label class="form-label">Title</label>
   <input type="text" class="form-control" name="title" id="title" />
   
@@ -12,6 +12,9 @@
   
   <label>Price</label>
   <input type="number" class="form-control" name="price" id="price" />
+
+  <label>Cover</label>
+  <input type="file" class="form-control" name="cover" id="cover" />
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

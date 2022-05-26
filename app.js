@@ -32,12 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Cookie middleware
 app.use(function(req, res, next) {
-  if (!req.session.user) {
+  if (!req.session.user && req.cookies.userId) {
     // Find the user
     db.User.findByPk(req.cookies.userId)
-    .then(function(user) {
+    .then(function(data) {
       // Act as login
-      req.session.user = user;
+      req.session.user = data;
       next();
     })
   } else {
