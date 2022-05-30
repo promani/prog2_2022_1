@@ -2,7 +2,7 @@ var db = require('../database/models');
 
 const controller = {
     index: function(req, res) {
-        db.Book.findAll()
+        db.Book.findAll({ include: [ { association: 'owner' } ] })
             .then(function (books) {
                 res.render('books_index', { books });
             })

@@ -21,5 +21,12 @@ module.exports = function (sequelize, dataTypes) {
 
     const Book = sequelize.define('Book', cols, configs);
 
+    Book.associate = function(models) {
+        Book.belongsTo(models.User, {
+            as: 'owner',
+            foreignKey: 'user_id'
+        })
+    }
+
     return Book;
 }

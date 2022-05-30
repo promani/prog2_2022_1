@@ -11,6 +11,7 @@
 
       <h2><%= books[i].title %></h2>
       <p>Author: <%= books[i].author %></p>
+      <p>Owner: <%= books[i].owner.username %></p>
       <p><a class="btn btn-secondary" href="/books/<%= books[i].id %>">View details »</a></p>
     </div>
   <% } %>

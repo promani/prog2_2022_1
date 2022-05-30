@@ -35,11 +35,11 @@ app.use(function(req, res, next) {
   if (!req.session.user && req.cookies.userId) {
     // Find the user
     db.User.findByPk(req.cookies.userId)
-    .then(function(data) {
-      // Act as login
-      req.session.user = data;
-      next();
-    })
+      .then(function(data) {
+        // Act as login
+        req.session.user = data;
+        next();
+      })
   } else {
     next();
   }
