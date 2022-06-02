@@ -15,7 +15,14 @@ module.exports = function (sequelize, dataTypes) {
         timestamps: false
     }
 
-    const Book = sequelize.define('User', cols, configs);
+    const User = sequelize.define('User', cols, configs);
 
-    return Book;
+    User.associate = function(models) {
+        User.hasMany(models.Book, {
+            as: 'books',
+            foreignKey: 'user_id'
+        })
+    }
+
+    return User;
 }
