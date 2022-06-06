@@ -35,3 +35,8 @@
         </div>
     </nav>
     <main class="container mt-4">
+    <% if (locals.error) { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>

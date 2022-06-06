@@ -2,7 +2,7 @@ var db = require('../database/models');
 
 const controller = {
     index: function(req, res) {
-        db.Book.findAll({ include: [ { association: 'owner' } ] })
+        db.Book.findAll({ include: { all: true, nested: false } })
             .then(function (books) {
                 res.render('books_index', { books });
             })
@@ -20,7 +20,7 @@ const controller = {
         })
     },
     show: function(req, res) {
-        db.Book.findByPk(req.params.id)
+        db.Book.findByPk(req.params.id, { include: { all: true, nested: true } })
             .then(function (book) {
                 res.render('books_show', { book });
             })
@@ -29,9 +29,15 @@ const controller = {
             })
     },
     add: function(req, res) {
+        if (!req.session.user) { 
+            throw Error('Not authorized.')
+        }
         res.render('books_add');
     },
     store: function(req, res) {
+        if (!req.session.user) { 
+            return res.render('books_add', { error: 'Not authorized.' });
+        }
         req.body.user_id = req.session.user.id;
         if (req.file) req.body.cover = (req.file.path).replace('public', '');
         db.Book.create(req.body)
@@ -43,6 +49,9 @@ const controller = {
             })
     },
     delete: function(req, res) {
+        if (!req.session.user) {
+            throw Error('Not authorized.')
+        }
         db.Book.destroy({ where: { id: req.params.id } })
             .then(function() {
                 res.redirect('/')
@@ -65,6 +74,22 @@ const controller = {
         db.Book.update(req.body, { where: { id: req.params.id } })
             .then(function(book) {
                 res.redirect('/')
+            })
+            .catch(function(error) {
+                res.send(error);
+            })
+    },
+    comment: function(req, res) {
+        if (!req.session.user) { 
+            throw Error('Not authorized.')
+        }
+        // Set user from session user
+        req.body.user_id = req.session.user.id;
+        // Set book from url params
+        req.body.book_id = req.params.id;
+        db.Comment.create(req.body)
+            .then(function() {
+                res.redirect('/books/' + req.params.id)
             })
             .catch(function(error) {
                 res.send(error);

@@ -1,4 +1,6 @@
-<%- include('./partials/header.ejs') %> 
+<%- include('./partials/header.ejs') %>
+<div class="row">
+  <div class="col">
     <h1><%= book.title %></h1>
     <ul>
       <li><b>Author:</b> <a href="/books/author/<%= book.author %>"><%= book.author %></a></li>
@@ -10,11 +12,29 @@
 
     <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
 
-    </br></br>
-
     <% if (locals.user && user.id == book.user_id) { %>
       <form action="/books/<%= book.id %>/delete" method="post">
         <input class="btn btn-danger" type="submit" value="Borrar">
       </form>
     <% } %>
+  </div>
+  <div class="col">
+    <h2>Comments</h2>
+    <% for (let i= 0; i < book.comments.length; i++) { %>
+      <div class="card mb-2">
+        <div class="card-body">
+          <b><%= book.comments[i].author.username %></b></br>
+          <%= book.comments[i].content %>
+        </div>
+      </div>
+    <% } %>
+    <form action="/books/<%= book.id %>/comment" method="post">
+			<label for="comment" class="form-label">Comment</label>
+      <input type="textarea" class="form-control mb-2" name="content" id="content">
+      <input class="btn btn-primary" type="submit" value="Comment">
+    </form>
+
+  </div>
+</div>
+    
 <%- include('./partials/footer.ejs') %> 

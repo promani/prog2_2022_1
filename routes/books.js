@@ -15,6 +15,8 @@ router.post('/add', upload.single('cover'), controller.store);
 
 router.post('/:id/delete', controller.delete);
 
+router.post('/:id/comment', controller.comment);
+
 router.get('/:id', controller.show);
 
 module.exports = router;
