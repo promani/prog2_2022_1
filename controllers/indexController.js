@@ -1,9 +1,26 @@
 var db = require('../database/models');
+var op = db.Sequelize.Op;
 var hasher = require('bcryptjs');
 
 const controller = {
     index: function(req, res) {
         res.redirect('/books');
+    },
+    search: function(req, res) {
+        db.Book.findAll({ 
+            where: {
+                [op.or]: [
+                    { title: { [op.like]: "%"+req.query.criteria+"%"} },
+                    { author: { [op.like]: "%"+req.query.criteria+"%"} }
+                ]
+            },
+            include: [ { association: 'owner' } ] 
+        }).then(function (books) {
+                res.render('books_index', { books });
+            })
+            .catch(function (error) {
+                res.send(error)
+            });
     },
     login: function(req, res) {
         res.render('login', { title: 'Login'});
