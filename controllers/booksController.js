@@ -2,7 +2,10 @@ var db = require('../database/models');
 
 const controller = {
     index: function(req, res) {
-        db.Book.findAll({ include: { all: true, nested: false } })
+        db.Book.findAll({ 
+            include: { all: true, nested: false }, 
+            order: [ ['id', 'DESC']],
+        })
             .then(function (books) {
                 res.render('books_index', { books });
             })
