@@ -12,9 +12,9 @@
         <div class="row container-fluid">
           <div class="col-8">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <% if (locals.user) { %>
+              <% if (locals.me) { %>
                 <li class="nav-item">
-                  <a class="nav-link"> Hello <%= user.username %></a>
+                  <a class="nav-link"> Hello <%= me.username %></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/me">Mi perfil</a>

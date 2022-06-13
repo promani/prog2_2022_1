@@ -12,7 +12,7 @@
 
     <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
 
-    <% if (locals.user && user.id == book.user_id) { %>
+    <% if (locals.me && me.id == book.user_id) { %>
       <form action="/books/<%= book.id %>/delete" method="post">
         <input class="btn btn-danger" type="submit" value="Borrar">
       </form>
